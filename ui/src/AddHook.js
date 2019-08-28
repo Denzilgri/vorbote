@@ -61,8 +61,8 @@ class AddHook extends Component {
             rows="5" cols="120" maxLength={Number(config.RESTHOOK_FILTER_MAX_LENGTH)}
             onChange={ (e) => this.setState({ filter: e.target.value }) } />
         </div>
-        <button onClick={this.addHook}>Add</button>
-        <button onClick={() => this.props.history.push('/')}>Cancel</button>
+        <button className="button is-primary" onClick={this.addHook}>Add</button>
+        <button className="button" onClick={() => this.props.history.push('/')}>Cancel</button>
       </div>
     );
   }

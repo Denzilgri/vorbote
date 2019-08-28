@@ -23,10 +23,12 @@
     "supertest": "^3.0.0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.10.2",
     "atob": "^2.1.1",
     "axios": "^0.17.1",
     "bluebird": "^3.5.1",
     "body-parser": "^1.15.2",
+    "bulma": "^0.7.5",
     "co": "^4.6.0",
     "config": "^1.21.0",
     "cors": "^2.7.1",

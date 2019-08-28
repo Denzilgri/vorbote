@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import 'bulma/css/bulma.min.css';
+import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import config from './config/config';
 import RestHooks from './RestHooks';
@@ -56,30 +58,58 @@ class App extends Component {
     if (!this.state.isLoggedIn) {
       return (
         <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Topcoder Event RestHooks Management</h1>
-          </header>
+          <nav class="navbar is-transparent">
+            <div class="container">
+              <div class="navbar-brand">
+                <a href="/" class="navbar-item">
+                  <h1 class="is-size-3">VORBOTE</h1>
+                </a>
+              </div>
+            </div>
+          </nav>
         </div>
       )
     }
     return (
       <Router>
         <div className="App">
-          <header className="App-header">
-            <div className="logged-in-user">
-              <p><span>Welcome, {this.state.currentUser.handle}</span></p>
-              <a onClick={this.logout}>Logout</a>
+          <nav class="navbar is-transparent">
+            <div class="container">
+              <div class="navbar-brand">
+                <a href="/" class="navbar-item">
+                  <h1 class="is-size-3">VORBOTE</h1>
+                </a>
+              </div>
+              <div class="navbar-menu">
+                <div class="navbar-end">
+                  <div class="navbar-item has-dropdown is-hoverable">
+                    <a href="/" class="navbar-link">
+                      Welcome, {this.state.currentUser.handle}
+                    </a>
+                    <div class="navbar-dropdown is-boxed">
+                      {/* <a href="/" class="navbar-item">Logout</a> */}
+                      <a onClick={this.logout}>Logout</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Topcoder Event RestHooks Management</h1>
-          </header>
-          <div>
-            <Route exact path="/" render={(props) => <RestHooks {...props} currentUser={this.state.currentUser} />} />
-            <Route exact path="/addhook" render={(props) => <AddHook {...props} currentUser={this.state.currentUser} />} />
-            <Route exact path="/updatehook/:id" render={(props) => <UpdateHook {...props} currentUser={this.state.currentUser} />} />
-            <Route exact path="/roletopics" render={(props) => <RoleTopics {...props} currentUser={this.state.currentUser} />} />
-          </div>
+          </nav>
+          <section class="section">
+            <div class="container">
+              <div class="columns">
+                <div class="column">
+                  <h5 class="is-size-5 has-text-grey-light">Topcoder Event RestHooks Management</h5>
+                </div>
+              </div>            
+              <div>
+                <Route exact path="/" render={(props) => <RestHooks {...props} currentUser={this.state.currentUser} />} />
+                <Route exact path="/addhook" render={(props) => <AddHook {...props} currentUser={this.state.currentUser} />} />
+                <Route exact path="/updatehook/:id" render={(props) => <UpdateHook {...props} currentUser={this.state.currentUser} />} />
+                <Route exact path="/roletopics" render={(props) => <RoleTopics {...props} currentUser={this.state.currentUser} />} />
+              </div>
+            </div>
+          </section>
         </div>
       </Router>
     );

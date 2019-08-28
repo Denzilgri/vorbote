@@ -89,7 +89,9 @@ class RoleTopics extends Component {
               <td>{item.topic}</td>
               <td>{item.createdAt}</td>
               <td>
-                <button onClick={() => this.deleteRoleTopic(item.id)}>Delete</button>
+                <button className="button is-danger" onClick={() => this.deleteRoleTopic(item.id)}>
+                  <i class="far fa-trash-alt"></i>
+                </button>
               </td>
             </tr>
               )) }
@@ -97,14 +99,16 @@ class RoleTopics extends Component {
           </tbody>
         </table>
         <br/>
+        <nav class="pagination is-small" role="navigation" aria-label="pagination">
         Page:
           { pages.map((p) => (
               p === page ? (
-                  <button key={p} className="CurrentPage">{p}</button>
+                  <button key={p} className="pagination-link is-current is-small">{p}</button>
                 ) : (
-                  <button key={p} onClick={() => this.browsePage(p)}>{p}</button>
+                  <button key={p} className="pagination-link is-small" onClick={() => this.browsePage(p)}>{p}</button>
                 )
             )) }
+        </nav>
         <br/>
         <div className="Row">
           <div className="Label">Role:</div> <input value={this.state.role}
@@ -117,10 +121,10 @@ class RoleTopics extends Component {
                 )) }
               }
             </select>
-          <button className="AddRoleTopicBtn" onClick={this.addRoleTopic}>Add</button>
+          <button className="AddRoleTopicBtn button is-primary" onClick={this.addRoleTopic}>Add</button>
         </div>
         <div className="Row">
-          <button onClick={() => this.props.history.push('/')}>Back To Home</button>
+          <button className="button is-link" onClick={() => this.props.history.push('/')}>Back To Home</button>
         </div>
       </div>
     );

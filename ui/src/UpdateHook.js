@@ -67,8 +67,12 @@ class UpdateHook extends Component {
             rows="5" cols="120" maxLength={Number(config.RESTHOOK_FILTER_MAX_LENGTH)}
             onChange={ (e) => this.setState({ filter: e.target.value }) } />
         </div>
-        <button onClick={this.updateHook}>Update</button>
-        <button onClick={() => this.props.history.push('/')}>Cancel</button>
+        <button className="button is-link" onClick={this.updateHook}>
+          <i class="far fa-edit"></i>
+        </button>
+        <button className="button is-danger" onClick={() => this.props.history.push('/')}>
+          <i class="far fa-trash-alt"></i>
+        </button>
       </div>
     );
   }
