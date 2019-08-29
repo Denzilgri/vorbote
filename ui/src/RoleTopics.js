@@ -70,56 +70,54 @@ class RoleTopics extends Component {
 
     return (
       <div>
-        <table className="RoleTopicsTable">
-          <thead>
+        <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+          <thead className="thead">
             <tr>
-              <th>ID</th>
-              <th>Role</th>
-              <th>Topic</th>
-              <th>Created At</th>
-              <th>Action</th>
+              <th className="has-text-centered">ID</th>
+              <th className="has-text-centered">ROLE</th>
+              <th className="has-text-centered">TOPIC</th>
+              <th className="has-text-centered">CREATED AT</th>
+              <th className="has-text-centered">ACTION</th>
             </tr>
           </thead>
-          <tbody>
-
-            { items.map((item) => (
-            <tr key={item.id}>
-              <td>{item.id}</td>
-              <td>{item.role}</td>
-              <td>{item.topic}</td>
-              <td>{item.createdAt}</td>
-              <td>
-                <button className="button is-danger" onClick={() => this.deleteRoleTopic(item.id)}>
-                  <i class="far fa-trash-alt"></i>
-                </button>
-              </td>
-            </tr>
-              )) }
-
+          <tbody className="tbody">
+            {items.map((item) => (
+              <tr key={item.id}>
+                <td className="has-text-centered">{item.id}</td>
+                <td>{item.role}</td>
+                <td><span className="tag is-dark">{item.topic}</span></td>
+                <td className="has-text-centered">{item.createdAt}</td>
+                <td className="has-text-centered">
+                  <button className="button is-danger" onClick={() => this.deleteRoleTopic(item.id)}>
+                    <i className="far fa-trash-alt"></i>
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
-        <br/>
-        <nav class="pagination is-small" role="navigation" aria-label="pagination">
-        Page:
-          { pages.map((p) => (
-              p === page ? (
-                  <button key={p} className="pagination-link is-current is-small">{p}</button>
-                ) : (
-                  <button key={p} className="pagination-link is-small" onClick={() => this.browsePage(p)}>{p}</button>
-                )
-            )) }
+        {/* <br/> */}
+        <nav className="pagination-container is-small" role="navigation" aria-label="pagination">
+          <span className="pagination-title">Page:</span>
+          {pages.map((p) => (
+            p === page ? (
+              <button key={p} className="pagination-link is-current is-small">{p}</button>
+            ) : (
+                <button key={p} className="pagination-link is-small" onClick={() => this.browsePage(p)}>{p}</button>
+              )
+          ))}
         </nav>
-        <br/>
+        {/* <br/> */}
         <div className="Row">
           <div className="Label">Role:</div> <input value={this.state.role}
-            onChange={ (e) => this.setState({ role: e.target.value }) } />
+            onChange={(e) => this.setState({ role: e.target.value })} />
           <div className="Label">Topic:</div> <select
-            onChange={ (e) => this.setState({ topic: e.target.value }) }>
-              <option value="">Select Topic</option>
-              { topics.map((tp, index) => (
-                  <option key={index}>{tp}</option>
-                )) }
-              }
+            onChange={(e) => this.setState({ topic: e.target.value })}>
+            <option value="">Select Topic</option>
+            {topics.map((tp, index) => (
+              <option key={index}>{tp}</option>
+            ))}
+            }
             </select>
           <button className="AddRoleTopicBtn button is-primary" onClick={this.addRoleTopic}>Add</button>
         </div>

@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import 'bulma/css/bulma.min.css';
 import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
+import '@fortawesome/fontawesome-free/css/regular.min.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import config from './config/config';
 import RestHooks from './RestHooks';
@@ -58,11 +59,11 @@ class App extends Component {
     if (!this.state.isLoggedIn) {
       return (
         <div className="App">
-          <nav class="navbar is-transparent">
-            <div class="container">
-              <div class="navbar-brand">
-                <a href="/" class="navbar-item">
-                  <h1 class="is-size-3">VORBOTE</h1>
+          <nav className="navbar is-transparent">
+            <div className="container">
+              <div className="navbar-brand">
+                <a href="/" className="navbar-item">
+                  <h1 className="is-size-3">VORBOTE</h1>
                 </a>
               </div>
             </div>
@@ -73,35 +74,35 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <nav class="navbar is-transparent">
-            <div class="container">
-              <div class="navbar-brand">
-                <a href="/" class="navbar-item">
-                  <h1 class="is-size-3">VORBOTE</h1>
+          <nav className="navbar is-transparent">
+            <div className="container">
+              <div className="navbar-brand">
+                <a href="/" className="navbar-item">
+                  <h1 className="is-size-3">VORBOTE</h1>
                 </a>
               </div>
-              <div class="navbar-menu">
-                <div class="navbar-end">
-                  <div class="navbar-item has-dropdown is-hoverable">
-                    <a href="/" class="navbar-link">
+              <div className="navbar-menu">
+                <div className="navbar-end">
+                  <div className="navbar-item has-dropdown is-hoverable">
+                    <a href="/" className="navbar-link">
                       Welcome, {this.state.currentUser.handle}
                     </a>
-                    <div class="navbar-dropdown is-boxed">
+                    <div className="navbar-dropdown is-boxed">
                       {/* <a href="/" class="navbar-item">Logout</a> */}
-                      <a onClick={this.logout}>Logout</a>
+                      <a className="navbar-item" onClick={this.logout}>Logout</a>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </nav>
-          <section class="section">
-            <div class="container">
-              <div class="columns">
-                <div class="column">
-                  <h5 class="is-size-5 has-text-grey-light">Topcoder Event RestHooks Management</h5>
+          <section className="section">
+            <div className="container">
+              <div className="columns">
+                <div className="column">
+                  <h5 className="is-size-5 has-text-grey-light">Topcoder Event RestHooks Management</h5>
                 </div>
-              </div>            
+              </div>
               <div>
                 <Route exact path="/" render={(props) => <RestHooks {...props} currentUser={this.state.currentUser} />} />
                 <Route exact path="/addhook" render={(props) => <AddHook {...props} currentUser={this.state.currentUser} />} />
