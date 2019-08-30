@@ -98,11 +98,6 @@ class App extends Component {
           </nav>
           <section className="section">
             <div className="container">
-              <div className="columns">
-                <div className="column">
-                  <h5 className="is-size-5 has-text-grey-light">Topcoder Event RestHooks Management</h5>
-                </div>
-              </div>
               <div>
                 <Route exact path="/" render={(props) => <RestHooks {...props} currentUser={this.state.currentUser} />} />
                 <Route exact path="/addhook" render={(props) => <AddHook {...props} currentUser={this.state.currentUser} />} />

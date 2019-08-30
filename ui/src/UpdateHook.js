@@ -44,35 +44,62 @@ class UpdateHook extends Component {
   render() {
     const { topics } = this.state;
     return (
-      <div>
-        <div className="Row">
-          <div className="Label">ID:</div> {this.props.match.params.id}
+      // <Route exact path="/" render={(props) => <RestHooks {...props} currentUser={this.state.currentUser} />} />
+      <div class="modal is-active" id="add-new-modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Update Resthook</p>
+            <button class="delete" onClick={() => this.props.history.push('/')}
+              aria-label="close"></button>
+          </header>
+          <section class="modal-card-body">
+            <form>
+              <div class="field">
+                <div className="Label">ID:</div> {this.props.match.params.id}
+              </div>
+              <div class="field">
+                <label for="topics" class="label">Topic*</label>
+                <div class="control">
+                  <div class="select">
+                    <select value={this.state.topic}
+                      onChange={(e) => this.setState({ topic: e.target.value })}>
+                      <option value="">Select Topic</option>
+                      {topics.map((tp, index) => (
+                        <option key={index}>{tp}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="field">
+                <label className="label">Endpoint*</label>
+                <div class="control">
+                  <input class="input" type="text" placeholder="Role endpoint"
+                    value={this.state.endpoint}
+                    onChange={(e) => this.setState({ endpoint: e.target.value })} />
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Rule</label>
+                <div class="control">
+                  <textarea class="textarea" placeholder="Enter your custom filter here"
+                    value={this.state.filter} rows="5" cols="120"
+                    maxLength={Number(config.RESTHOOK_FILTER_MAX_LENGTH)}
+                    onChange={(e) => this.setState({ filter: e.target.value })} />
+                </div>
+              </div>
+            </form>
+          </section>
+          <footer class="modal-card-foot">
+            <button className="button is-link" onClick={this.updateHook}>
+              Update
+            </button>
+            <button className="button" onClick={() => this.props.history.push('/')}>
+              Cancel
+            </button>
+          </footer>
         </div>
-        <div className="Row">
-          <div className="Label">Topic:</div> <select value={this.state.topic}
-            onChange={(e) => this.setState({ topic: e.target.value })}>
-            <option value="">Select Topic</option>
-            {topics.map((tp, index) => (
-              <option key={index}>{tp}</option>
-            ))}
-            }
-            </select>
-        </div>
-        <div className="Row">
-          <div className="Label">Endpoint:</div> <input value={this.state.endpoint}
-            onChange={(e) => this.setState({ endpoint: e.target.value })} />
-        </div>
-        <div className="Row">
-          <div className="Label">Custom Filter Logic:</div> <textarea value={this.state.filter}
-            rows="5" cols="120" maxLength={Number(config.RESTHOOK_FILTER_MAX_LENGTH)}
-            onChange={(e) => this.setState({ filter: e.target.value })} />
-        </div>
-        <button className="button is-link" onClick={this.updateHook}>
-          Update
-        </button>
-        <button className="button is-danger" onClick={() => this.props.history.push('/')}>
-          Cancel
-        </button>
       </div>
     );
   }

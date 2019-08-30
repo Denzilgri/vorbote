@@ -19,6 +19,10 @@ class RoleTopics extends Component {
     this.deleteRoleTopic = this.deleteRoleTopic.bind(this);
     this.addRoleTopic = this.addRoleTopic.bind(this);
     this.browsePage = this.browsePage.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    // defining element references
+    this.modalElementRef = React.createRef();
   }
 
   componentDidMount() {
@@ -59,6 +63,21 @@ class RoleTopics extends Component {
     });
   }
 
+  /**
+   * Opens a modal to add a role
+   * @param {*} hookFilter
+   */
+  openModal() {
+    this.modalElementRef.current.style.display = 'flex';
+  }
+
+  /**
+   * Closes the modal
+   */
+  closeModal() {
+    this.modalElementRef.current.style.display = 'none';
+  }
+
   render() {
     if (!this.props.currentUser.isAdmin) return null;
 
@@ -69,6 +88,11 @@ class RoleTopics extends Component {
     for (let i = 1; i <= pageCount; i += 1) pages.push(i);
 
     return (
+      <div className="columns">
+        <div className="column">
+          <h5 className="is-size-5 has-text-grey-light">Your Role Management</h5>
+        </div>
+      </div>
       <div>
         <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
           <thead className="thead">
@@ -96,7 +120,6 @@ class RoleTopics extends Component {
             ))}
           </tbody>
         </table>
-        {/* <br/> */}
         <nav className="pagination-container is-small" role="navigation" aria-label="pagination">
           <span className="pagination-title">Page:</span>
           {pages.map((p) => (
@@ -107,22 +130,51 @@ class RoleTopics extends Component {
               )
           ))}
         </nav>
-        {/* <br/> */}
-        <div className="Row">
-          <div className="Label">Role:</div> <input value={this.state.role}
-            onChange={(e) => this.setState({ role: e.target.value })} />
-          <div className="Label">Topic:</div> <select
-            onChange={(e) => this.setState({ topic: e.target.value })}>
-            <option value="">Select Topic</option>
-            {topics.map((tp, index) => (
-              <option key={index}>{tp}</option>
-            ))}
-            }
-            </select>
-          <button className="AddRoleTopicBtn button is-primary" onClick={this.addRoleTopic}>Add</button>
+        <div className="modal" ref={this.modalElementRef}>
+          <div className="modal-background"></div>
+          <div className="modal-card">
+            <header className="modal-card-head">
+              <p className="modal-card-title">Add New Role</p>
+              <button className="delete" onClick={this.closeModal}
+                aria-label="close"></button>
+            </header>
+            <section className="modal-card-body">
+              <form>
+                <div className="field">
+                  <label className="label">Role*</label>
+                  <div className="control">
+                    <input value={this.state.role}
+                      className="input" type="text" placeholder="Role"
+                      onChange={(e) => this.setState({ role: e.target.value })} />
+                  </div>
+                </div>
+                <div className="field">
+                  <label for="topics" className="label">Topic*</label>
+                  <div className="control">
+                    <div className="select">
+                      <select
+                        onChange={(e) => this.setState({ topic: e.target.value })}>
+                        <option value="">Select Topic</option>
+                        {topics.map((tp, index) => (
+                          <option key={index}>{tp}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </section>
+            <footer className="modal-card-foot">
+              <button className="button is-primary" onClick={this.addRoleTopic}>Add</button>
+              <button className="button" onClick={this.closeModal}>Cancel</button>
+            </footer>
+          </div>
         </div>
         <div className="Row">
           <button className="button is-link" onClick={() => this.props.history.push('/')}>Back To Home</button>
+          <button onClick={() => { this.props.history.push('/addhook') }}
+            className="button pull-right is-primary" onClick={this.openModal}
+            id="add-new-resthook">Add New Role Topic</button>
         </div>
       </div>
     );

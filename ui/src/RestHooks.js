@@ -64,6 +64,11 @@ class RestHooks extends Component {
     for (let i = 1; i <= pageCount; i += 1) pages.push(i);
 
     return (
+      <div className="columns">
+        <div className="column">
+          <h5 className="is-size-5 has-text-grey-light">Your registered resthooks</h5>
+        </div>
+      </div>
       <div>
         <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
           <thead className="thead">
@@ -110,11 +115,6 @@ class RestHooks extends Component {
             ))}
           </tbody>
         </table>
-        {/* <table className="RestHooksTable">
-
-            
-          </table> */}
-        {/* <br /> */}
         <nav className="pagination-container is-small" role="navigation" aria-label="pagination">
           <span className="pagination-title">Page:</span>
           {pages.map((p) => (
@@ -125,14 +125,13 @@ class RestHooks extends Component {
               )
           ))}
         </nav>
-        {/* <br /> */}
         <button onClick={() => { this.props.history.push('/addhook') }}
           className="button pull-right is-primary" id="add-new-resthook">Add New Resthook</button>
         {this.props.currentUser.isAdmin && (
           <button className="button pull-right is-primary" id="manage-role-topics"
             onClick={() => { this.props.history.push('/roletopics') }}>Manage Role Topics</button>
         )}
-        <div className="modal" ref={this.modalElementRef} id="rule-modal">
+        <div className="modal" ref={this.modalElementRef}>
           <div className="modal-background"></div>
           <div className="modal-content">
             <pre ref={this.preElementRef}></pre>
