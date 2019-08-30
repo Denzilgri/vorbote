@@ -41,6 +41,14 @@ class UpdateHook extends Component {
     });
   }
 
+  /**
+   * Open alerts modal
+   */
+  openAlertsModal(content) {
+    document.querySelector('#alert-modal').style.display = 'flex';
+    document.querySelector('#alert-content').textContent = content;
+  }
+
   render() {
     const { topics } = this.state;
     return (

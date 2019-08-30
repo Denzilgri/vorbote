@@ -60,6 +60,8 @@ class RoleTopics extends Component {
     }
     API.createRoleTopic({ role, topic }, () => {
       _self.browsePage(_self.state.page);
+      // close the modal if successful
+      this.closeModal();
     });
   }
 
@@ -78,6 +80,14 @@ class RoleTopics extends Component {
     this.modalElementRef.current.style.display = 'none';
   }
 
+  /**
+   * Open alerts modal
+   */
+  openAlertsModal(content) {
+    document.querySelector('#alert-modal').style.display = 'flex';
+    document.querySelector('#alert-content').textContent = content;
+  }
+
   render() {
     if (!this.props.currentUser.isAdmin) return null;
 
@@ -88,12 +98,12 @@ class RoleTopics extends Component {
     for (let i = 1; i <= pageCount; i += 1) pages.push(i);
 
     return (
-      <div className="columns">
-        <div className="column">
-          <h5 className="is-size-5 has-text-grey-light">Your Role Management</h5>
-        </div>
-      </div>
       <div>
+        <div className="columns">
+          <div className="column">
+            <h5 className="is-size-5 has-text-grey-light">Your Role Management</h5>
+          </div>
+        </div>
         <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
           <thead className="thead">
             <tr>
@@ -165,7 +175,7 @@ class RoleTopics extends Component {
               </form>
             </section>
             <footer className="modal-card-foot">
-              <button className="button is-primary" onClick={this.addRoleTopic}>Add</button>
+              <button className="button is-primary" onClick={() => {this.addRoleTopic}}>Add</button>
               <button className="button" onClick={this.closeModal}>Cancel</button>
             </footer>
           </div>

@@ -24,6 +24,8 @@ class App extends Component {
       connectorUrl: config.ACCOUNTS_APP_CONNECTOR,
       frameId: 'tc-accounts-iframe',
     });
+    this.closeModal = this.closeModal.bind(this);
+    this.alertModalElementRef = React.createRef();
   }
 
   componentDidMount() {
@@ -53,6 +55,13 @@ class App extends Component {
   logout() {
     const url = `${config.TC_AUTH_URL}/#!/logout?retUrl=${encodeURIComponent(config.APP_URL)}`
     location.href = url; // eslint-disable-line no-restricted-globals
+  }
+
+  /**
+   * Closes the alerts modal
+   */
+  closeModal() {
+    this.alertModalElementRef.current.style.display = 'none';
   }
 
   render() {
@@ -106,6 +115,13 @@ class App extends Component {
               </div>
             </div>
           </section>
+          <div className="modal" id="alert-modal" ref={this.alertModalElementRef}>
+            <div className="modal-background"></div>
+            <div className="modal-content">
+              <p id="alert-content"></p>
+            </div>
+            <button className="modal-close is-large" aria-label="close" onClick={this.closeModal}></button>
+          </div>
         </div>
       </Router>
     );

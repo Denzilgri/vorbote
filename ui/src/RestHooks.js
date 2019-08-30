@@ -64,12 +64,12 @@ class RestHooks extends Component {
     for (let i = 1; i <= pageCount; i += 1) pages.push(i);
 
     return (
-      <div className="columns">
-        <div className="column">
-          <h5 className="is-size-5 has-text-grey-light">Your registered resthooks</h5>
-        </div>
-      </div>
       <div>
+        <div className="columns">
+          <div className="column">
+            <h5 className="is-size-5 has-text-grey-light">Your registered resthooks</h5>
+          </div>
+        </div>
         <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
           <thead className="thead">
             <tr>
